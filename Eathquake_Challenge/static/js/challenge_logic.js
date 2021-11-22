@@ -30,11 +30,13 @@ let baseMaps = {
 
 // 1. Add a 2nd layer group for the tectonic plate data.
 let allEarthquakes = new L.LayerGroup();
+let techtonicPlates = new L.LayerGroup();
 
 
 // 2. Add a reference to the tectonic plates group to the overlays object.
 let overlays = {
-  "Earthquakes": allEarthquakes
+  "Earthquakes": allEarthquakes,
+  "Techtonic Plates": techtonicPlates
 };
 
 // Then we add a control to the map that will allow the user to change which
@@ -106,7 +108,7 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
 
   // Then we add the earthquake layer to our map.
   allEarthquakes.addTo(map);
-
+});
   // Here we create a legend control object.
 let legend = L.control({
   position: "bottomright"
@@ -127,21 +129,30 @@ legend.onAdd = function() {
   ];
 
 // Looping through our intervals to generate a label with a colored square for each interval.
-  for (var i = 0; i < magnitudes.length; i++) {
-    console.log(colors[i]);
-    div.innerHTML +=
-      "<i style='background: " + colors[i] + "'></i> " +
-      magnitudes[i] + (magnitudes[i + 1] ? "&ndash;" + magnitudes[i + 1] + "<br>" : "+");
-    }
-    return div;
-  };
+for (var i = 0; i < magnitudes.length; i++) {
+  console.log(colors[i]);
+  div.innerHTML +=
+    "<i style='background: " + colors[i] + "'></i> " +
+    magnitudes[i] + (magnitudes[i + 1] ? "&ndash;" + magnitudes[i + 1] + "<br>" : "+");
+  }
+  return div;
+};
 
-  // Finally, we our legend to the map.
-  legend.addTo(map);
+// Finally, we our legend to the map.
+legend.addTo(map);
 
+let myStyle = {
+  color: 'red',
+  weight: 1
+};
 
-  // 3. Use d3.json to make a call to get our Tectonic Plate geoJSON data.
-  d3.json().then(() {
-    
-  });
+// 3. Use d3.json to make a call to get our Tectonic Plate geoJSON data.
+d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json").then(function(data) {
+  console.log(data);
+  // Pass the techtonic data to the geojson layer
+  L.geoJSON(data, {
+    style: myStyle
+  }).addTo(techtonicPlates);
+  // Add techtonic layer
+  techtonicPlates.addTo(map);
 });
