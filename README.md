@@ -36,7 +36,7 @@ By clicking on the circles, the user can see the magnitude and location to the r
 Upon opening it up, the Street Map is displayed with all layers selected
 <img src="images\streets.png">
 
-By selecting the Satellite Map, the map displays a satellite imae map that contains a full range of geographic information as well as the street information
+By selecting the Satellite Map, the map displays a satellite image map that contains a full range of geographic information as well as the street information
 
 <img src="images\satellite.png">
 
@@ -44,7 +44,7 @@ By selecting the Dark Map, the user is provided a geographic context while highl
 
 <img src="images\dark.png">
 
-To see only the major earthquakes, the ser only needs to deselect the Earthquakes and they will get all major earthquakes(greater that a magnitude of 5)
+To see only the major earthquakes, the user only needs to deselect the Earthquakes and they will get all major earthquakes(greater that a magnitude of 4.5)
 
 <img src="images\major_eq_wth_techt.png">
 
